@@ -14,7 +14,9 @@ init_log(
 )
 
 
+@logger.catch
 def fetch_content(url=None):
+    logger.debug(f"Input url: {url}")
     if url:
         try:
             response = requests.get(url)
@@ -37,7 +39,6 @@ def create_ui():
         url_input = gr.Textbox(
             label="输入 URL", placeholder="https://example.com/document.md", visible=False
         )
-        logger.debug(f"Input url: {url_input}")
 
         submit_button = gr.Button("加载", visible=False)
 
