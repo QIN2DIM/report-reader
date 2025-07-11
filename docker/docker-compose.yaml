@@ -1,0 +1,10 @@
+services:
+  report-reader:
+    image: ghcr.io/qin2dim/report-reader:latest
+    restart: always
+    container_name: report-reader
+    ports:
+      - "31313:31313"
+    volumes:
+      - "./logs:/app/app/logs"
+    command: uv run app/main.py
