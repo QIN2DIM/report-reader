@@ -75,6 +75,7 @@ def create_ui():
 
 def main():
     app = create_ui()
+    logger.debug(f"Start the service, please visit http://0.0.0.0:{settings.SERVER_READER_PORT}")
     app.launch(
         server_name="0.0.0.0", server_port=settings.SERVER_READER_PORT, show_error=True, share=True
     )
