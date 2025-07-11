@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import gradio as gr
 import requests
 
-from settings import settings, THEME_DIR
+from settings import settings, THEME_DIR, LOG_DIR
 from utils import init_log
 from loguru import logger
 
