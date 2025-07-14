@@ -7,4 +7,4 @@ services:
       - "31313:8501"
     volumes:
       - "./logs:/app/app/logs"
-    command: streamlit run app/main.py
+    command: uv run streamlit run app/main.py
