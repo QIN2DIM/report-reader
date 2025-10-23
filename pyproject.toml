@@ -5,9 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "gradio>=5.49.1",
     "httpx>=0.28.1",
-    "loguru>=0.7.3",
-    "streamlit>=1.46.1",
+    "pydantic-settings>=2.11.0",
 ]
 
 [dependency-groups]

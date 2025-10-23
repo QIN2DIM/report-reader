@@ -4,7 +4,9 @@ services:
     restart: always
     container_name: report-reader
     ports:
-      - "31313:8501"
+      - "31313:31313"
+    environment:
+      SERVER_READER_PORT: 31313
     volumes:
       - "./logs:/app/app/logs"
-    command: uv run streamlit run app/main.py
+    command: uv run app/main.py
