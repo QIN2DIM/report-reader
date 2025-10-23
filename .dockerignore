@@ -72,3 +72,4 @@ README.md
 app/**/*.md
 .github/
 .cursor/
+.gradio
