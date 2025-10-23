@@ -12,6 +12,22 @@ PROJECT_DIR = Path(__file__).parent
 THEME_DIR = PROJECT_DIR.joinpath("theme")
 
 
+# Force Gradio to default to light theme by setting the __theme URL param on first load
+FORCE_LIGHT_THEME_HEAD = """
+<script>
+(function() {
+  try {
+    var url = new URL(window.location.href);
+    if (url.searchParams.get('__theme') !== 'light') {
+      url.searchParams.set('__theme', 'light');
+      window.location.replace(url.toString());
+    }
+  } catch (e) {}
+})();
+</script>
+"""
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_ignore_empty=True, extra="ignore")
 
@@ -40,7 +56,7 @@ def create_ui():
         THEME_DIR.joinpath("phycat.css").resolve(),
         THEME_DIR.joinpath("phycat.user.css").resolve(),
     ]
-    with gr.Blocks(css_paths=css_paths) as app:
+    with gr.Blocks(css_paths=css_paths, head=FORCE_LIGHT_THEME_HEAD) as app:
         url_input = gr.Textbox(
             label="输入 URL", placeholder="https://example.com/document.md", visible=False
         )
