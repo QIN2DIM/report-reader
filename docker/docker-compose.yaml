@@ -1,3 +1,4 @@
+name: report-reader
 services:
   report-reader:
     image: ghcr.io/qin2dim/report-reader:latest
