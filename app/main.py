@@ -39,8 +39,9 @@ settings = Settings()
 
 def fetch_content(url=None):
     if url:
+        client = httpx.Client(timeout=30)
         try:
-            response = httpx.get(url)
+            response = client.get(url)
             response.raise_for_status()
             content = response.text
             file_extension = urlparse(url).path.split(".")[-1].lower()
