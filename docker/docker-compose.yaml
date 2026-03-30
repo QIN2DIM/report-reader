@@ -8,6 +8,3 @@ services:
       - "31313:31313"
     environment:
       SERVER_READER_PORT: 31313
-    volumes:
-      - "./logs:/app/app/logs"
-    command: uv run app/main.py

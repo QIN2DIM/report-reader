@@ -1,17 +1,21 @@
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm
+# Stage 1: Build
+FROM golang:1.23-alpine AS builder
 
-USER root
+WORKDIR /build
 
-WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
 
-SHELL ["/bin/bash", "-c"]
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /report-reader .
 
-ENV UV_LINK_MODE=copy
+# Stage 2: Runtime
+FROM alpine:3.21
 
-# Install dependencies
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=uv.lock,target=uv.lock \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --frozen --no-cache --all-extras
+RUN apk --no-cache add ca-certificates
 
-ADD . /app
+COPY --from=builder /report-reader /report-reader
+
+EXPOSE 31313
+
+ENTRYPOINT ["/report-reader"]
