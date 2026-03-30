@@ -39,7 +39,7 @@ settings = Settings()
 
 def fetch_content(url=None):
     if url:
-        client = httpx.Client(timeout=30)
+        client = httpx.Client(timeout=30, verify=False)
         try:
             response = client.get(url)
             response.raise_for_status()
